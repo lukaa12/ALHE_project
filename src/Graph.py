@@ -73,7 +73,8 @@ class Graph:
     def get_active_cases(self, country, to_day):
         country = self.parse_country(country)
         stats = self.get_stats(country)
-
+        if(stats == None):
+            return 0
         cases = 0
         for i in range(stats.shape[0]):
             if (datetime.date(stats[i, 2], stats[i, 1], stats[i, 0]) <= to_day):
