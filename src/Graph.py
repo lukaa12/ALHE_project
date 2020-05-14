@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import requests
 import datetime
 
@@ -42,6 +43,7 @@ class Graph:
     """Represents structure of Countries with borders and data about COVID in regions"""
 
     def __init__(self, borders, cases):
+        """Constructs graph"""
         self.edges = borders
         self.vertices = {}
         self.countries = list(borders.keys())
@@ -51,7 +53,7 @@ class Graph:
         cases = cases.set_index('countriesAndTerritories')
 
         for country in list(borders.keys()):
-            country_data = None
+            country_data = np.array([[1, 1, 1970, 0, 0]])
             try:
                 country_data = cases.loc[country.upper()].to_numpy()
             except KeyError as error:
@@ -62,19 +64,21 @@ class Graph:
             self.vertices[country] = country_data
 
     def get_neighbours(self, country):
+        """Returns list of neighbours of country"""
         country = self.parse_country(country)
         if country != 'Not_a_country':
             return self.edges[country]
 
     def get_stats(self, country):
+        """Returns array of stats of country containing rows of: day, month, year, daily_new_cases, daily_deaths"""
         country = self.parse_country(country)
         return self.vertices[country]
 
     def get_active_cases(self, country, to_day):
+        """Returns active cases in day to_day in country"""
         country = self.parse_country(country)
         stats = self.get_stats(country)
-        if(stats == None):
-            return 0
+
         cases = 0
         for i in range(stats.shape[0]):
             if (datetime.date(stats[i, 2], stats[i, 1], stats[i, 0]) <= to_day):
