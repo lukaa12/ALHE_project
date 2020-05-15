@@ -19,6 +19,7 @@ class Path:
         for i in range(len(self.countries)-1,-1,-1):
             if(self.countries[i] not in checked):
                 self.score += graph.get_active_cases(self.countries[i], self.start_date + datetime.timedelta(days=i))
+                checked.append(self.countries[i])
 
     def get_profit(self, graph, country):
         """Zwraca potencjalny zysk po dodaniu kraju na koniec ścieżki"""

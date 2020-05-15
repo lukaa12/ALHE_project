@@ -6,14 +6,16 @@ import numpy as np
 class EvolutionaryAlgorithm:
     """Implementacja algorytmu ewolucyjnego
     Na wejściu przyjmuje argumentu:
+    -graf na którym ma działać
     -dzień w którym naukowiec zaczyna podróż,
     -liczność populacji początkowej (μ)
     -liczność zbioru do reprodukcji (λ)
-    -prawdopodobieństwo mutacji pojedynczego węzła ścieżki
+    -prawdopodobieństwo mutacji pojedynczej ścieżki
     -sposób wyboru osobników do następnego pokolenia
         -'best' μ najlepszych
         -'roulette' metoda koła ruletki
         -'ranking' selekcja rankingowa
+    -liczba pokoleń przez które będzie działać algorytm
     """
     def __init__(self, graph, start_date, popul_q, repr_q, mutation, selection, generations):
         self.graph = graph
@@ -27,7 +29,10 @@ class EvolutionaryAlgorithm:
         self.best = None
 
     def find_path(self):
-        None
+        self.start_generation()
+        for i in range(self.generations):
+            self.active_generation = self.select_next_generation(self.reproduce(self.random_lambda()))
+        return self.best
 
     def start_generation(self):
         end_day = date(self.graph.get_stats('Germany')[0,2], self.graph.get_stats('Germany')[0,1],
@@ -40,19 +45,80 @@ class EvolutionaryAlgorithm:
                 nexts = self.graph.get_neighbours(path.countries[-1])
                 path.add(nexts[np.random.randint(len(nexts))])
             self.active_generation.append(path)
+        self.active_generation.sort(reverse=True, key=lambda x: x.score)
+        self.best = self.active_generation[0]
 
     def random_lambda(self):
-        None
+        popul = []
+        choices = np.random.randint(0, len(self.active_generation), self.lambd)
+        for i in choices:
+            popul.append(self.active_generation[i])
+        return popul
 
     def reproduce(self, temp_popul):
-        None
+        offspring = []
+        for i in range(len(temp_popul)):
+            for j in range(i + 1, len(temp_popul),1):
+                if(i < len(temp_popul) and self.can_be_mixed(temp_popul[i],temp_popul[j])):
+                    k , l = self.cross_paths(temp_popul[i], temp_popul[j])
+                    temp_popul.remove(temp_popul[j])
+                    offspring.append(k)
+                    offspring.append(l)
+                    break
+        for i in range(len(offspring)):
+            if (np.random.random_sample() < self.mutation_p):
+                offspring[i] = self.mutate(offspring[i])
+        return offspring
 
-    def select_next_popul(self, reproduced):
-        None
+
+    def select_next_generation(self, reproduced):
+        candidats = self.active_generation + reproduced
+        for i in candidats:
+            i.eval(self.graph)
+        if self.selection_method == 'best' or True:
+            candidats.sort(reverse= True, key= lambda x : x.score)
+            if candidats[0].score > self.best.score:
+                self.best = candidats[0]
+        return candidats[:self.ni]
 
     def cross_paths(self, path1, path2):
-        None
+        itrsct = [value for value in path1.countries if value in path2.countries]
+        point1, point2 = path1.countries.index(itrsct[len(itrsct) // 2]), path2.countries.index(itrsct[len(itrsct) // 2])
+        need_len = len(path2.countries)
+        if (point1 == point2):
+            ch1 = path1.countries[:point1] + path2.countries[point2:]
+            ch2 = path2.countries[:point2] + path1.countries[point1:]
+            child1, child2 = path1, path2
+            child1.countries, child2.countries = ch1, ch2
+            return child1, child2
+        if (point1 < point2):
+            tmp, tmpp = path1, point1
+            path1, point1 = path2, point2
+            path2, point2 = tmp, tmpp
+        path = path1.countries[:point1] + path2.countries[point2:]
+        ch1 = path[:need_len]
+        ch2 = path[-need_len:]
+        child1, child2 = path1, path2
+        child1.countries, child2.countries = ch1, ch2
+        return child1, child2
 
     def mutate(self, path):
-        None
+        for i in range(1,len(path.countries)-1, 1):
+            possibles = list(set(self.graph.get_neighbours(path.countries[i-1])) & set(self.graph.get_neighbours(path.countries[i+1])))
+            if(len(possibles) > 1):
+                if(path.countries[i] in possibles):
+                    possibles.remove(path.countries[i])
+                path.countries[i] = possibles[np.random.randint(len(possibles))]
+                return path
+        possibles = self.graph.get_neighbours(path.countries[-2])
+        path.countries[-1] = possibles[np.random.randint(len(possibles))]
+        return path
+
+
+
+    def can_be_mixed(self, path1, path2):
+        for i in path1.countries[1:-1]:
+            if i in path2.countries[1:-1]:
+                return True
+        return False
 
