@@ -23,6 +23,8 @@ class EvolutionaryAlgorithm:
         self.ni = popul_q
         self.lambd = repr_q
         self.mutation_p = mutation
+        if selection not in ['best', 'roulette', 'ranking']:
+            raise ValueError('Unsupported selection method: ' + selection)
         self.selection_method = selection
         self.generations = generations
         self.active_generation = []
@@ -73,13 +75,44 @@ class EvolutionaryAlgorithm:
 
     def select_next_generation(self, reproduced):
         candidats = self.active_generation + reproduced
+        new_generation = []
         for i in candidats:
             i.eval(self.graph)
-        if self.selection_method == 'best' or True:
+        for candidat in candidats:
+            if candidat.score > self.best.score:
+                self.best = candidat
+
+        if self.selection_method == 'best':
             candidats.sort(reverse= True, key= lambda x : x.score)
-            if candidats[0].score > self.best.score:
-                self.best = candidats[0]
-        return candidats[:self.ni]
+            new_generation = candidats[:self.ni]
+
+        if self.selection_method == 'roulette' or True:
+            scores_sum = 0.0
+            for i in candidats:
+                scores_sum += i.score
+            shots = np.random.random(self.ni)
+            for shot in shots:
+                for i in range(len(candidats)):
+                    if shot < candidats[i].score / scores_sum:
+                        new_generation.append(candidats[i])
+                        scores_sum -= candidats[i].score
+                        candidats.pop(i)
+                        break
+                    else:
+                        shot -= candidats[i].score / scores_sum
+
+        if self.selection_method == 'ranking':
+            candidats.sort(reverse= True, key= lambda x : x.score)
+            while(len(new_generation) != self.ni):
+                for i in new_generation:
+                    candidats.remove(i)
+                for i in range(len(candidats)):
+                    if np.random.random() < (len(candidats) - i) / len(candidats):
+                        new_generation.append(candidats[i])
+                    if len(new_generation) == self.ni:
+                        break
+
+        return new_generation
 
     def cross_paths(self, path1, path2):
         itrsct = [value for value in path1.countries if value in path2.countries]
@@ -121,4 +154,3 @@ class EvolutionaryAlgorithm:
             if i in path2.countries[1:-1]:
                 return True
         return False
-
