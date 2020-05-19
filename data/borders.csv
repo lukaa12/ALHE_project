@@ -5,7 +5,7 @@ Algeria,Italy,Libya,Mali,Mauritania,Morocco,Niger,Spain,Tunisia,Western Sahara
 American Samoa,Samoa,Tonga,Cook Islands,Niue,New Zealand,Tokelau,New Zealand
 Andorra,France,Spain
 Angola,Democratic Republic of the Congo,Republic of the Congo,Namibia,Zambia
-Anguilla,Antigua and Barbuda,British Virgin Islands,Netherlands,Saint Barthélemy,France,Saint Martin,France,United States Virgin Islands,United States
+Anguilla,Antigua and Barbuda,British Virgin Islands,Netherlands,Saint Barthélemy,France,France,United States Virgin Islands,United States
 Antigua and Barbuda,France,Saint Kitts and Nevis,Anguilla,Montserrat,United Kingdom,Saint Barthélemy,France
 Argentina,Bolivia,Brazil,Chile,Paraguay,Uruguay,Falkland Islands
 Argentine Antarctica,Chilean Antarctic Territory,British Antarctic Territory,United Kingdom
@@ -24,14 +24,12 @@ Belarus,Latvia,Lithuania,Poland,Russia,Ukraine
 Belgium,France,Germany,Luxembourg,Netherlands,United Kingdom
 Belize,Guatemala,Honduras,Mexico
 Benin,Burkina Faso,Niger,Nigeria,Togo
-Bermuda
 Bhutan,China,India
 Bolivia,Argentina,Brazil,Chile,Paraguay,Peru
 Bosnia and Herzegovina,Croatia,Montenegro,Serbia
 Botswana,Namibia,South Africa,Zambia,Zimbabwe
-Bouvet Island
 Brazil,Argentina,Bolivia,Colombia,France,Guyana,Paraguay,Peru,Suriname,Uruguay,Venezuela
-British Antarctic Territory,Chilean Antarctic Territory,Argentine Antarctica,Argentina,Queen Maud Land,Norway
+British Antarctic Territory,Chilean Antarctic Territory,Argentine Antarctica,Argentina,Norway
 British Indian Ocean Territory,Maldives
 British Virgin Islands,Anguilla,Puerto Rico,United States,United States Virgin Islands,United States
 Brunei,China,Malaysia,Philippines,Taiwan,Vietnam
@@ -46,11 +44,9 @@ Cayman Islands,Cuba,Honduras,Jamaica
 Central African Republic,Cameroon,Chad,Democratic Republic of the Congo,Republic of the Congo,South Sudan,Sudan
 Chad,Cameroon,Central African Republic,Libya,Niger,Nigeria,Sudan
 Chile,Argentina,Bolivia,Peru
-Chilean Antarctic Territory,Argentine Antarctica,British Antarctic Territory,United Kingdom,Peter I Island,Norway
+Chilean Antarctic Territory,Argentine Antarctica,British Antarctic Territory,United Kingdom,Norway
 China,Afghanistan,Bhutan,Brunei,India,Indonesia,Japan,Kazakhstan,North Korea,South Korea,Kyrgyzstan,Laos,Malaysia,Mongolia,Myanmar,Nepal,Pakistan,Philippines,Russia,Tajikistan,Vietnam,Hong Kong,Macau,China,Taiwan
 Christmas Island,Indonesia
-Clipperton Island
-Cocos (Keeling) Islands
 Colombia,Brazil,Costa Rica,Dominican Republic,Ecuador,Haiti,Jamaica,Nicaragua,Panama,Peru,Venezuela
 Comoros,France,Madagascar,Mozambique,Seychelles,Tanzania,French Southern and Antarctic Lands
 Democratic Republic of the Congo,Angola,Burundi,Central African Republic,Republic of the Congo,Rwanda,South Sudan,Tanzania,Uganda,Zambia
@@ -62,8 +58,8 @@ Côte d'Ivoire,Burkina Faso,Ghana,Guinea,Liberia,Mali
 Croatia,Bosnia and Herzegovina,Hungary,Italy,Montenegro,Serbia,Slovenia
 Cuba,Bahamas,Haiti,Honduras,Jamaica,Mexico,United States,Cayman Islands,Navassa Island,United States
 Curaçao,Dominican Republic,Netherlands,Venezuela,Aruba
-Cyprus,Northern Cyprus,Egypt,Greece,Israel,Lebanon,Syria,Turkey,Akrotiri and Dhekelia,United Nations Buffer Zone in Cyprus
-Northern Cyprus,Cyprus,Syria,Turkey,Akrotiri and Dhekelia,United Nations Buffer Zone in Cyprus
+Cyprus,Northern Cyprus,Egypt,Greece,Israel,Lebanon,Syria,Turkey
+Northern Cyprus,Cyprus,Syria,Turkey
 Czech Republic,Austria,Germany,Poland,Slovakia
 Denmark,Germany,Norway,Poland,Sweden,United Kingdom
 Djibouti,Eritrea,Ethiopia,Somalia,Yemen
@@ -120,12 +116,11 @@ Jan Mayen,Iceland,Greenland
 Japan,China,South Korea,Philippines,Russia,Northern Mariana Islands,Taiwan
 Jarvis Island,Kiribati
 Jersey,France,Guernsey
-Johnston Atoll
 Jordan,Egypt,Iraq,Israel,Saudi Arabia,Syria,Palestine
 Kazakhstan,Azerbaijan,China,Kyrgyzstan,Russia,Turkmenistan,Uzbekistan
 Kenya,Ethiopia,Somalia,South Sudan,Tanzania,Uganda
 Kingman Reef,Kiribati,Palmyra Atoll
-Kiribati,Marshall Islands,Nauru,Tuvalu,Cook Islands,French Polynesia,France,Baker Island,United States,Jarvis Island,United States,Kingman Reef,United States,Palmyra Atoll,United States,Tokelau,New Zealand
+Kiribati,Marshall Islands,Nauru,Tuvalu,Cook Islands,French Polynesia,France,United States,Jarvis Island,United States,Kingman Reef,United States,Palmyra Atoll,United States,Tokelau,New Zealand
 North Korea,China,South Korea,Russia
 South Korea,China,Japan,North Korea
 Kosovo,Albania,Montenegro,North Macedonia,Serbia
@@ -165,7 +160,7 @@ Namibia,Angola,Botswana,South Africa,Zambia
 Nauru,Kiribati,Marshall Islands
 Navassa Island,Cuba,Haiti,Jamaica
 Nepal,India,China
-Netherlands,Belgium,Germany,Saint Kitts and Nevis,United Kingdom,Venezuela,Anguilla,Curaçao,Netherlands,Saint Barthélemy,France,Saint Martin,France,Sint Maarten,Netherlands,United States Virgin Islands,United States
+Netherlands,Belgium,Germany,Saint Kitts and Nevis,United Kingdom,Venezuela,Anguilla,Curaçao,Netherlands,Saint Barthélemy,France,France,Sint Maarten,Netherlands,United States Virgin Islands,United States
 New Caledonia,Fiji,Solomon Islands,Vanuatu,Coral Sea Islands,Norfolk Island,Australia
 New Zealand,Australia,Norfolk Island
 Nicaragua,Colombia,Costa Rica,El Salvador,Honduras,Jamaica,Panama
@@ -194,8 +189,7 @@ Qatar,Bahrain,Iran,Saudi Arabia,United Arab Emirates
 Romania,Bulgaria,Hungary,Moldova,Russia,Serbia,Ukraine
 Russia,Azerbaijan,Belarus,China,Estonia,Finland,Georgia,Japan,Kazakhstan,North Korea,Latvia,Lithuania,Mongolia,Norway,Poland,Romania,Sweden,Turkey,Ukraine,United States,Svalbard,Norway
 Rwanda,Burundi,Democratic Republic of the Congo,Tanzania,Uganda
-Saint Barthélemy,Antigua and Barbuda,Netherlands,Saint Kitts and Nevis,Anguilla,Saint Martin,France,Sint Maarten,Netherlands
-"Saint Helena, Ascension and Tristan da Cunha"
+Saint Barthélemy,Antigua and Barbuda,Netherlands,Saint Kitts and Nevis,Anguilla,France,Sint Maarten,Netherlands
 Saint Kitts and Nevis,Antigua and Barbuda,Netherlands,Venezuela,Montserrat,Saint Barthélemy,France
 Saint Lucia,Barbados,France,Saint Vincent and the Grenadines,Venezuela
 Saint Pierre and Miquelon,Canada
@@ -209,14 +203,13 @@ Serbia,Bosnia and Herzegovina,Bulgaria,Croatia,Hungary,Montenegro,North Macedoni
 Seychelles,Comoros,Madagascar,Mauritius,Tanzania,French Southern and Antarctic Lands
 Sierra Leone,Guinea,Liberia
 Singapore,Indonesia,Malaysia
-Sint Maarten,Netherlands,Saint Barthélemy,Saint Martin,France
+Sint Maarten,Netherlands,Saint Barthélemy,France
 Slovakia,Austria,Czech Republic,Hungary,Poland,Ukraine
 Slovenia,Austria,Croatia,Italy,Hungary
 Solomon Islands,Fiji,Papua New Guinea,Vanuatu,Coral Sea Islands,New Caledonia,France
 Somalia,Djibouti,Ethiopia,Kenya,Yemen
 Somaliland,Djibouti,Ethiopia,Somalia,Yemen
 South Africa,Botswana,Eswatini (Swaziland),Lesotho,Mozambique,Namibia,Zimbabwe
-South Georgia and the South Sandwich Islands
 South Ossetia,Georgia,Russia
 South Sudan,Central African Republic,Democratic Republic of the Congo,Ethiopia,Kenya,Sudan,Uganda
 Spain,Algeria,Andorra,France,Italy,Morocco,Portugal,Gibraltar,Western Sahara
@@ -245,7 +238,7 @@ Uganda,Democratic Republic of the Congo,Kenya,Rwanda,South Sudan,Tanzania
 Ukraine,Belarus,Hungary,Moldova,Poland,Romania,Russia,Slovakia,Turkey
 United Arab Emirates,Iran,Oman,Qatar,Saudi Arabia
 United Kingdom,Belgium,Denmark,France,Germany,Ireland,Netherlands,Norway,Faroe Islands,Guernsey,United Kingdom,Isle of Man,United Kingdom
-United Kingdom,Antigua and Barbuda,Argentina,Bahamas,Belgium,Cuba,Cyprus,Denmark,Dominican Republic,France,Germany,Haiti,Honduras,Ireland,Jamaica,Maldives,Netherlands,Norway,Saint Kitts and Nevis,Spain,Venezuela,Faroe Islands,French Polynesia,France,Puerto Rico,United States,Saint Barthélemy,France,Saint Martin,France,United States Virgin Islands,United States
+United Kingdom,Antigua and Barbuda,Argentina,Bahamas,Belgium,Cuba,Cyprus,Denmark,Dominican Republic,France,Germany,Haiti,Honduras,Ireland,Jamaica,Maldives,Netherlands,Norway,Saint Kitts and Nevis,Spain,Venezuela,Faroe Islands,French Polynesia,France,Puerto Rico,United States,Saint Barthélemy,France,France,United States Virgin Islands,United States
 United States,Bahamas,Canada,Cuba,Mexico,Russia,Midway Atoll
 United States,Bahamas,Canada,Cuba,Dominican Republic,Haiti,Jamaica,Japan,Kiribati,Marshall Islands,Mexico,Federated States of Micronesia,Netherlands,Russia,Samoa,Tonga,Venezuela,Anguilla,British Virgin Islands,United Kingdom,Cook Islands,New Zealand,Niue,New Zealand,Tokelau,New Zealand
 United States Virgin Islands,Netherlands,Venezuela,Anguilla,British Virgin Islands,United Kingdom,Puerto Rico,United States
