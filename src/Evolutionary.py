@@ -17,7 +17,7 @@ class EvolutionaryAlgorithm:
         -'ranking' selekcja rankingowa
     -liczba pokoleń przez które będzie działać algorytm
     """
-    def __init__(self, graph, start_date, popul_q, repr_q, mutation, selection, generations):
+    def __init__(self, graph, start_date, popul_q, repr_q, mutation, selection, generations, goal_function):
         self.graph = graph
         self.start_date = start_date
         self.ni = popul_q
@@ -27,6 +27,9 @@ class EvolutionaryAlgorithm:
             raise ValueError('Unsupported selection method: ' + selection)
         self.selection_method = selection
         self.generations = generations
+        if goal_function not in ['recovered', 'deaths']:
+            raise ValueError('Unsupported goal function: ' + goal_function)
+        self.goal_function = goal_function
         self.active_generation = []
         self.best = None
 
@@ -77,32 +80,49 @@ class EvolutionaryAlgorithm:
         candidats = self.active_generation + reproduced
         new_generation = []
         for i in candidats:
-            i.eval(self.graph)
+            i.eval(self.graph, self.goal_function)
         for candidat in candidats:
-            if candidat.score > self.best.score:
+            if self.goal_function == 'recovered' and candidat.score > self.best.score:
+                self.best = candidat
+            elif self.goal_function == 'deaths' and candidat.score < self.best.score:
                 self.best = candidat
 
         if self.selection_method == 'best':
-            candidats.sort(reverse= True, key= lambda x : x.score)
+            if self.goal_function == 'recovered':
+                candidats.sort(reverse= True, key= lambda x : x.score)
+            elif self.goal_function == 'deaths':
+                candidats.sort(reverse=False, key=lambda x: x.score)
             new_generation = candidats[:self.ni]
 
-        if self.selection_method == 'roulette' or True:
+        if self.selection_method == 'roulette':
             scores_sum = 0.0
             for i in candidats:
                 scores_sum += i.score
             shots = np.random.random(self.ni)
             for shot in shots:
                 for i in range(len(candidats)):
-                    if shot < candidats[i].score / scores_sum:
-                        new_generation.append(candidats[i])
-                        scores_sum -= candidats[i].score
-                        candidats.pop(i)
-                        break
-                    else:
-                        shot -= candidats[i].score / scores_sum
+                    if self.goal_function =='recovered':
+                        if shot < candidats[i].score / scores_sum:
+                            new_generation.append(candidats[i])
+                            scores_sum -= candidats[i].score
+                            candidats.pop(i)
+                            break
+                        else:
+                            shot -= candidats[i].score / scores_sum
+                    elif self.goal_function == 'deaths':
+                        if shot < (scores_sum - candidats[i].score) / scores_sum:
+                            new_generation.append(candidats[i])
+                            scores_sum -= candidats[i].score
+                            candidats.pop(i)
+                            break
+                        else:
+                            shot -= (scores_sum - candidats[i].score) / scores_sum
 
         if self.selection_method == 'ranking':
-            candidats.sort(reverse= True, key= lambda x : x.score)
+            if self.goal_function == 'recovered':
+                candidats.sort(reverse=True, key=lambda x: x.score)
+            elif self.goal_function == 'deaths':
+                candidats.sort(reverse=False, key=lambda x: x.score)
             while(len(new_generation) != self.ni):
                 for i in new_generation:
                     candidats.remove(i)
@@ -154,3 +174,12 @@ class EvolutionaryAlgorithm:
             if i in path2.countries[1:-1]:
                 return True
         return False
+
+
+# graf = Graph.get_graph()
+# start_day = date(2020, 4, 24)
+# algorytm = EvolutionaryAlgorithm(graf, start_day, 100, 150, 0.5, 'best', 50, 'deaths')
+# najlepszy = algorytm.find_path()
+#
+# print(najlepszy.countries)
+# print(najlepszy.score)
