@@ -7,10 +7,13 @@ import copy
 class TabuSearch:
     """Implementacja algorytmu przeszukiwania przestrzeni ścieżek z tabu"""
 
-    def __init__(self, graph, start_date, tabu_len):
+    def __init__(self, graph, start_date, tabu_len, goal_function):
         self.graph = graph
         self.start_date = start_date
         self.tabu_len = tabu_len
+        if goal_function not in ['recovered', 'deaths']:
+            raise ValueError('Unsupported goal function: ' + goal_function)
+        self.goal_function = goal_function
         self.tabu = []
         self.best = None
         self.x = None
@@ -35,9 +38,13 @@ class TabuSearch:
         local_best = Y[0]
         for i in Y:
             i.eval(self.graph)
-            if i.score > local_best.score:
+            if self.goal_function == 'recovered' and i.score > local_best.score:
                 local_best = i
-        if local_best.score > self.best.score:
+            elif self.goal_function == 'deaths' and i.score < local_best.score:
+                local_best = i
+        if self.goal_function == 'recovered' and local_best.score > self.best.score:
+            self.best = local_best
+        elif self.goal_function == 'deaths' and local_best.score < self.best.score:
             self.best = local_best
         self.x = local_best
         self.tabu.append(self.x)
@@ -90,5 +97,4 @@ class TabuSearch:
                     if not_in_tabu:
                         neighbours.append(new_neighbour)
         return neighbours
-
 
