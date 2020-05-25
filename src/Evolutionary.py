@@ -16,6 +16,9 @@ class EvolutionaryAlgorithm:
         -'roulette' metoda koła ruletki
         -'ranking' selekcja rankingowa
     -liczba pokoleń przez które będzie działać algorytm
+    -funkcja celu
+        -'recovered'
+        -'deaths'
     """
     def __init__(self, graph, start_date, popul_q, repr_q, mutation, selection, generations, goal_function):
         self.graph = graph
