@@ -33,12 +33,20 @@ class Path:
                         if (datetime.date(graph.get_stats(country)[i, 2], graph.get_stats(country)[i, 1], graph.get_stats(country)[i, 0]) < to_day):
                             self.score += graph.get_stats(country)[i, 4]
 
-    def get_profit(self, graph, country):
+    def get_profit(self, graph, country, function='recovered'):
         """Zwraca potencjalny zysk po dodaniu kraju na koniec ścieżki"""
         profit = 0
-        for i in range(len(self.countries)):
-            if(self.countries[i] == country):
-                profit -= graph.get_active_cases(self.countries[i], self.start_date + datetime.timedelta(days=i))
+        if function == 'recovered':
+            for i in range(len(self.countries)):
+                if(self.countries[i] == country):
+                    profit -= graph.get_active_cases(self.countries[i], self.start_date + datetime.timedelta(days=i))
 
-        profit += graph.get_active_cases(country, self.start_date + datetime.timedelta(days=len(self.countries)))
+            profit += graph.get_active_cases(country, self.start_date + datetime.timedelta(days=len(self.countries)))
+
+        elif function == 'deaths':
+            if country not in self.countries:
+                to_day = self.start_date + datetime.timedelta(days=len(self.countries))
+                for i in range(graph.get_stats(country).shape[0]):
+                    if datetime.date(graph.get_stats(country)[i, 2], graph.get_stats(country)[i, 1], graph.get_stats(country)[i, 0]) >= to_day:
+                        profit += graph.get_stats(country)[i, 4]
         return profit
