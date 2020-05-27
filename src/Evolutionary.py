@@ -179,10 +179,7 @@ class EvolutionaryAlgorithm:
         return False
 
 
-# graf = Graph.get_graph()
-# start_day = date(2020, 4, 24)
-# algorytm = EvolutionaryAlgorithm(graf, start_day, 100, 150, 0.5, 'best', 50, 'deaths')
-# najlepszy = algorytm.find_path()
-#
-# print(najlepszy.countries)
-# print(najlepszy.score)
+def search(graph, start_date, popul_q, repr_q, mutation, selection, generations, goal_function):
+    evo = EvolutionaryAlgorithm(graph, start_date, popul_q, repr_q, mutation, selection, generations, goal_function)
+    evo.find_path()
+    return evo.best

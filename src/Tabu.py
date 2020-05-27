@@ -5,7 +5,14 @@ import numpy as np
 import copy
 
 class TabuSearch:
-    """Implementacja algorytmu przeszukiwania przestrzeni ścieżek z tabu"""
+    """Implementacja algorytmu przeszukiwania przestrzeni ścieżek z tabu
+    Na wejściu przyjmuje argumenty:
+    -graf na którym ma działać
+    -dzień w którym naukowiec zaczyna podróż,
+    -długość tabu
+    -funkcja celu
+        -'recovered'
+        -'deaths'"""
 
     def __init__(self, graph, start_date, tabu_len, goal_function):
         self.graph = graph
@@ -97,4 +104,10 @@ class TabuSearch:
                     if not_in_tabu:
                         neighbours.append(new_neighbour)
         return neighbours
+
+
+def search(graph, start_date, tabu_len, iterations, goal_function):
+    tabu_search = TabuSearch(graph, start_date, tabu_len, goal_function)
+    tabu_search.find_path(iterations)
+    return tabu_search.best
 
