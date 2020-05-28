@@ -3,3 +3,5 @@
 ## Authors:
 *  Łukasz Wolanin ![lukaa12](https://github.com/lukaa12)
 *  Patryk Łempio ![Saiter711](https://github.com/Saiter711)
+## Final documentation (in Polish)
+[Dokumentacja końcowa](docs/Dokumentacja_koncowa.pdf)
